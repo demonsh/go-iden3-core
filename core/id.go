@@ -160,7 +160,7 @@ func IdenState(clr *merkletree.Hash, rer *merkletree.Hash, ror *merkletree.Hash)
 	if err != nil {
 		panic(err)
 	}
-	idenState, err := poseidon.PoseidonHash(bi)
+	idenState, err := poseidon.Hash(bi)
 	if err != nil {
 		panic(err)
 	}

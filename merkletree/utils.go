@@ -61,12 +61,12 @@ func ElemBytesToBigInts(elems ...ElemBytes) []*big.Int {
 	return ints
 }
 
-func ElemBytesToPoseidonInput(elems ...ElemBytes) ([poseidon.T]*big.Int, error) {
+func ElemBytesToPoseidonInput(elems ...ElemBytes) ([]*big.Int, error) {
 	bigints := ElemBytesToBigInts(elems...)
 
 	z := big.NewInt(0)
-	b := [poseidon.T]*big.Int{z, z, z, z, z, z}
-	copy(b[:poseidon.T], bigints[:])
+	b := []*big.Int{z, z, z, z, z, z}
+	copy(b[:], bigints[:])
 
 	return b, nil
 }
@@ -76,16 +76,16 @@ func ElemBytesToPoseidonInput(elems ...ElemBytes) ([poseidon.T]*big.Int, error) 
 // implementations.
 // The maxim slice input size is poseidon.T
 func HashElems(elems ...ElemBytes) (*Hash, error) {
-	if len(elems) > poseidon.T {
-		return nil, fmt.Errorf("HashElems input can not be bigger than %v", poseidon.T)
-	}
+	//if len(elems) > poseidon {
+	//	return nil, fmt.Errorf("HashElems input can not be bigger than %v", poseidon.T)
+	//}
 
 	bi, err := ElemBytesToPoseidonInput(elems...)
 	if err != nil {
 		return nil, err
 	}
 
-	poseidonHash, err := poseidon.PoseidonHash(bi)
+	poseidonHash, err := poseidon.Hash(bi)
 	if err != nil {
 		return nil, err
 	}
@@ -94,9 +94,9 @@ func HashElems(elems ...ElemBytes) (*Hash, error) {
 
 // HashElemsKey performs a poseidon hash over the array of ElemBytes.
 func HashElemsKey(key *big.Int, elems ...ElemBytes) (*Hash, error) {
-	if len(elems) > poseidon.T-1 {
-		return nil, fmt.Errorf("HashElemsKey input can not be bigger than %v", poseidon.T-1)
-	}
+	//if len(elems) > poseidon.T-1 {
+	//	return nil, fmt.Errorf("HashElemsKey input can not be bigger than %v", poseidon.T-1)
+	//}
 	if key == nil {
 		key = new(big.Int).SetInt64(0)
 	}
@@ -105,7 +105,7 @@ func HashElemsKey(key *big.Int, elems ...ElemBytes) (*Hash, error) {
 		return nil, err
 	}
 	copy(bi[len(elems):], []*big.Int{key})
-	poseidonHash, err := poseidon.PoseidonHash(bi)
+	poseidonHash, err := poseidon.Hash(bi)
 	if err != nil {
 		return nil, err
 	}

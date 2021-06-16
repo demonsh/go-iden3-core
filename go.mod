@@ -29,7 +29,7 @@ require (
 	github.com/iancoleman/orderedmap v0.0.0-20190318233801-ac98e3ecb4b0 // indirect
 	github.com/iden3/go-circom-prover-verifier v0.0.1
 	github.com/iden3/go-circom-witnesscalc v0.0.1
-	github.com/iden3/go-iden3-crypto v0.0.5
+	github.com/iden3/go-iden3-crypto v0.0.6-0.20210308142348-8f85683b2cef
 	github.com/iden3/go-wasm3 v0.0.1
 	github.com/influxdata/influxdb v1.7.8 // indirect
 	github.com/ipfsconsortium/go-ipfsc v0.0.0-20190116161836-3629ecc1f76f
